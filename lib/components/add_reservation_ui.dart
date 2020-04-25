@@ -11,6 +11,7 @@ import 'package:bobo_ui/ui/card_reservation.dart';
 import 'package:bobo_ui/ui/mpesa_reservation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rave_flutter/rave_flutter.dart';
 
 class AddReservationUI extends StatefulWidget {
 
@@ -47,6 +48,49 @@ class _AddReservationUIState extends State<AddReservationUI> {
     return lst;
   }
 
+  void startPayment() async {
+    var initializer = RavePayInitializer(
+        amount: 1.00 ,
+        publicKey: "FLWPUBK_TEST-a9ffe38208d7054f581fd8d20febcd0e-X",
+        encryptionKey: "FLWSECK_TESTa722e4dbb9e0",
+        subAccounts:  null)
+      ..country = "KE"
+      ..currency =  "KSH"
+      ..email = "Jamesdennis869@gmail.com"
+      ..fName = "Dennis"
+      ..lName = "Kariuki"
+      ..narration =  ''
+      ..txRef = "rave_flutter-${DateTime.now().toString()}"
+      ..orderRef = "rave_flutter-${DateTime.now().toString()}"
+      ..acceptMpesaPayments = false
+      ..acceptAccountPayments = false
+      ..acceptCardPayments = true
+      ..acceptAchPayments = false
+      ..acceptGHMobileMoneyPayments = false
+      ..acceptUgMobileMoneyPayments = false
+      ..acceptMobileMoneyFrancophoneAfricaPayments = false
+      ..displayEmail = false
+      ..displayAmount = false
+      ..staging = false
+      ..isPreAuth = false
+      ..displayFee = false;
+
+    var response = await RavePayManager()
+        .prompt(context: context, initializer: initializer);
+    print(response);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(response?.message),
+            content: FlatButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: Text('Ok')),
+          );
+        });
+//    scaffoldKey.currentState
+//        .showSnackBar(SnackBar(content: Text(response?.message)));
+  }
 
   List<DropdownMenuItem> _tables({List<TableModal> tables}){
     List<DropdownMenuItem> _lst =[];
@@ -604,15 +648,16 @@ class _AddReservationUIState extends State<AddReservationUI> {
                                     RaisedButton(
                                       child: Text("Pay via Card"),
                                       onPressed: (){
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context){
-                                            return ChangeNotifierProvider.value(
-                                              value: ReservationModule(),
-                                              child: CardTopupModalReservation(reservationModal: _reservationModal),
-                                            );
-                                          }
-                                        );
+//                                        showModalBottomSheet(
+//                                          context: context,
+//                                          builder: (context){
+//                                            return
+//
+//                                          }
+//                                        );
+                                        startPayment();
+
+
                                       },
                                     ),
                                     

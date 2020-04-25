@@ -3,6 +3,7 @@ import 'package:bobo_ui/modals/reservation_modal.dart';
 import 'package:bobo_ui/modules/reservation_module.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rave_flutter/rave_flutter.dart';
 
 class CardTopupModalReservation extends StatefulWidget {
   final ReservationModal reservationModal;
@@ -61,6 +62,10 @@ class _CardTopupModalReservationState extends State<CardTopupModalReservation> {
     _cvvController.dispose();
     super.dispose();
   }
+
+
+
+
 
 
   @override
@@ -177,11 +182,15 @@ class _CardTopupModalReservationState extends State<CardTopupModalReservation> {
                   CircularProgressIndicator() :
                   RaisedButton(
                     onPressed: (){
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                      reservationModule.addReservation = widget.reservationModal;
+
+                      //
+                      //startPayment();
+                      //
+//                      Navigator.of(context).pop();
+//                      Navigator.of(context).pop();
+//                      Navigator.of(context).pop();
+//                      Navigator.of(context).pop();
+//                      reservationModule.addReservation = widget.reservationModal;
                     },
                     child: Text(
                       '"Pay now"',
@@ -194,4 +203,6 @@ class _CardTopupModalReservationState extends State<CardTopupModalReservation> {
         ),
      );
   }
+
+
 }
