@@ -2,6 +2,8 @@ import 'package:bobo_ui/authentication.dart';
 import 'package:bobo_ui/components/companies_register.dart.dart';
 import 'package:bobo_ui/modules/club_module.dart';
 import 'package:bobo_ui/root_page.dart';
+import 'package:bobo_ui/taxi/lib/screens/home.dart';
+import 'package:bobo_ui/taxi/lib/states/app_state.dart';
 import 'package:bobo_ui/ui/company_ui.dart';
 import 'package:bobo_ui/ui/ticket_page.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,21 @@ import 'package:provider/provider.dart';
 
 
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  return runApp
+    (
+
+      MultiProvider(
+                        providers: [
+                                     ChangeNotifierProvider.value(value: AppState(),)
+                                   ],
+                         child: MyApp(),
+
+
+      )
+  );
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -36,6 +52,8 @@ class MyApp extends StatelessWidget {
               // ChangeNotifierProvider<EventModule>(builder: (context)=> EventModule(),),
               // ChangeNotifierProvider<TicketManagerModule>(builder: (context)=> TicketManagerModule(),),
             ],
+
+
           child: RootPage()
           ),
       // home: ChangeNotifierProvider<ClubModule>(
@@ -47,6 +65,7 @@ class MyApp extends StatelessWidget {
       //   ),
       // ),
       routes: <String, WidgetBuilder> {
+        '/taxi':(BuildContext context) => MyHomePage(title: 'BOBO Taxi'),
         '/club': (BuildContext context) => ClubsPage(),
         '/event': (BuildContext context) => EventsPage(),
         '/company': (BuildContext context) => CompanyUi(),

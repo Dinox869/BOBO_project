@@ -28,7 +28,9 @@ class _MenuWidgetState extends State<MenuWidget> {
     'Companies', 
     'Tickets', 
     // 'Payment', 
-    'Reservation', ];
+    'Reservation',
+    'Taxi'
+  ];
 
   UserModel userModel = UserModel(username: '', id: '', dp: '', email: '');
 
@@ -163,6 +165,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       break;
                                     case 'Reservation':
                                       _routPath = '/reservation';
+                                      break;
+                                    case 'Taxi':
+                                      _routPath = '/taxi';
                                       break;
                                     default:
                                     _routPath = '/';

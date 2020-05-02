@@ -12,7 +12,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class ClubModule extends ChangeNotifier{
-
   // Firebase
   final databaseReference = Firestore.instance;
 
