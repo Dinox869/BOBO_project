@@ -44,10 +44,13 @@ class ExploreWidget extends StatelessWidget {
               width: realW(159 + (standardWidth - 159) * currentExplorePercent),
               height: realH(122 + (766 - 122) * currentExplorePercent),
               decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                    Color(0xFF5496FF),
-                    Color(0xFF8739E5),
-                  ]),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    colors: [
+                      Color(0xFF59C2FF),
+                      Color(0xFF1270E3),
+                    ],
+                  ),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(realW(80 + (50 - 80) * currentExplorePercent)),
                       topRight: Radius.circular(realW(80 + (50 - 80) * currentExplorePercent)))),

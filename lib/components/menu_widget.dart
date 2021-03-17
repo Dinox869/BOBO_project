@@ -67,10 +67,14 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 height: realH(236),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(topRight: Radius.circular(realW(50))),
-                                    gradient: const LinearGradient(begin: Alignment.topLeft, colors: [
-                                      Color(0xFF59C2FF),
-                                      Color(0xFF1270E3),
-                                    ])),
+                                    gradient:  LinearGradient(
+                                        begin: Alignment.topLeft,
+                                         colors: [
+                                               Color(0xFF59C2FF),
+                                               Color(0xFF1270E3),
+                                             ],
+                                    )
+                                ),
                                 child: InkWell(
                                   onTap: (){
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditProfile()));

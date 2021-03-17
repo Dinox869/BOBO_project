@@ -81,7 +81,7 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
     animationControllerExplore = AnimationController(
         duration: Duration(
             milliseconds: 1 + (800 * (isExploreOpen ? currentExplorePercent : (1 - currentExplorePercent))).toInt()),
-        vsync: this);
+        );
     curve = CurvedAnimation(parent: animationControllerExplore, curve: Curves.ease);
     animation = Tween(begin: offsetExplore, end: open ? 760.0 - 122 : 0.0).animate(curve)
       ..addListener(() {
@@ -101,16 +101,16 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
     animationControllerSearch = AnimationController(
         duration: Duration(
             milliseconds: 1 + (800 * (isSearchOpen ? currentSearchPercent : (1 - currentSearchPercent))).toInt()),
-        vsync: this);
+       );
     curve = CurvedAnimation(parent: animationControllerSearch, curve: Curves.ease);
     animation = Tween(begin: offsetSearch, end: open ? 347.0 - 68.0 : 0.0).animate(curve)
-      ..addListener(() {
-        setState(() {
+      ..addListener((){
+        setState((){
           offsetSearch = animation.value;
         });
       })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
+      ..addStatusListener((status){
+        if (status == AnimationStatus.completed){
           isSearchOpen = open;
         }
       });
@@ -118,7 +118,7 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
   }
 
   void animateMenu(bool open) {
-    animationControllerMenu = AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    animationControllerMenu = AnimationController(duration: Duration(milliseconds: 500));
     curve = CurvedAnimation(parent: animationControllerMenu, curve: Curves.ease);
     animation = Tween(begin: open ? 0.0 : 358.0, end: open ? 358.0 : 0.0).animate(curve)
       ..addListener(() {
@@ -144,8 +144,9 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
         height: screenHeight,
         child: Stack(
           children: <Widget>[
+
             // map
-            Consumer<ClubModule>(
+            Consumer <ClubModule>(
               builder: (context, clubModule, _){
                 return GoogleMap(
                 mapType: MapType.normal,
@@ -155,7 +156,8 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
                 );
               },
             ),
-            //explore
+
+            // explore
             ExploreWidget(
               currentExplorePercent: currentExplorePercent,
               currentSearchPercent: currentSearchPercent,
@@ -164,9 +166,10 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
               onVerticalDragUpdate: onExploreVerticalUpdate,
               onPanDown: () => animationControllerExplore?.stop(),
             ),
-            //blur
+
+            // blur
             offsetSearch != 0
-                ? BackdropFilter(
+              ? BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10 * currentSearchPercent, sigmaY: 10 * currentSearchPercent),
                     child: Container(
                       color: Colors.white.withOpacity(0.1 * currentSearchPercent),
@@ -177,10 +180,12 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
                 : const Padding(
                     padding: const EdgeInsets.all(0),
                   ),
+
             //explore content
             ExploreContentWidget(
               currentExplorePercent: currentExplorePercent,
             ),
+
             //recent search
             RecentSearchWidget(
               currentSearchPercent: currentSearchPercent,
@@ -189,7 +194,8 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
             // offsetSearch != 0
             //     ? Positioned(
             //         bottom: realH(88),
-            //         left: realW((standardWidth - 320) / 2),
+            //         left: realW((
+            //         standardWidth-320)/2),
             //         width: realW(320),
             //         height: realH(135 * currentSearchPercent),
             //         child: Opacity(
@@ -205,10 +211,12 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
             //     : const Padding(
             //         padding: const EdgeInsets.all(0),
             //       ),
+
             //search menu
             // SearchMenuWidget(
             //   currentSearchPercent: currentSearchPercent,
             // ),
+
             //search
             SearchWidget(
               currentSearchPercent: currentSearchPercent,
@@ -218,11 +226,13 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
               onHorizontalDragUpdate: onSearchHorizontalDragUpdate,
               onPanDown: () => animationControllerSearch?.stop(),
             ),
+
             //search back
             SearchBackWidget(
               currentSearchPercent: currentSearchPercent,
               animateSearch: animateSearch,
             ),
+
             //layer button
             // MapButton(
             //   currentExplorePercent: currentExplorePercent,
@@ -234,7 +244,8 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
             //   isRight: false,
             //   icon: Icons.layers,
             // ),
-            //directions button
+
+            // //directions button
             // MapButton(
             //   currentSearchPercent: currentSearchPercent,
             //   currentExplorePercent: currentExplorePercent,
@@ -249,6 +260,7 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
             //     Color(0xFF1270E3),
             //   ]),
             // ),
+
             // //my_location button
             // MapButton(
             //   currentSearchPercent: currentSearchPercent,
@@ -260,6 +272,7 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
             //   icon: Icons.my_location,
             //   iconColor: Colors.blue,
             // ),
+
             //menu button
             Positioned(
               bottom: realH(53),
@@ -282,16 +295,20 @@ class _GoogleMapState extends State<GoogleMapPage> with TickerProviderStateMixin
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(realW(36)), topRight: Radius.circular(realW(36))),
+                        bottomRight: Radius.circular(realW(36)),
+			topRight: Radius.circular(realW(36))),
                         boxShadow: [
                           BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.3), blurRadius: realW(36)),
-                        ]),
+                        ]
+		     ),
                   ),
                 ),
               ),
             ),
+
             //menu
             MenuWidget(currentMenuPercent: currentMenuPercent, animateMenu: animateMenu, signOut: widget.signOut),
+
           ],
         ),
       ),
